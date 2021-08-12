@@ -50,8 +50,21 @@ window: https://www.youtube.com/watch?v=APOPm01BVrk
 
 `pip install -r requirements.txt`
 
-(1.2 Optionally configure the script by updating the global variables (UPPER_CASE) in run.py to set up 
-details for staging and production server.)
+(1.2 Optionally configure the script by setting the environment variables)
+
+can be done by adding a .env file and filling out the values ( see .env-example als a template)
+or directly setting the values on the system environment.
+ 
+| Name        | description  |
+| ------------- | ------------- |
+| MG_CATALOGUE_NETWORKS | comma separated list of network names|
+| MG_CATALOGUE_COHORTS | comma separated list of network names |
+| MG_CATALOGUE_URL_STAGING| full url of stating server|
+| MG_CATALOGUE_USERNAME_STAGING|  |
+| MG_CATALOGUE_PASSWORD_STAGING| |
+| MG_CATALOGUE_URL_PROD| full url of stating server |
+| MG_CATALOGUE_USERNAME_PROD| |
+| MG_CATALOGUE_PASSWORD_PROD| |
 
 2. Run the script
 
@@ -60,6 +73,7 @@ details for staging and production server.)
 3. deactivate the the virtual python environment
 
 `deactivate`
+
 # For script developers
 Make sure to update the requirements.txt file is requirements change ( added , removed, version change ...)
 

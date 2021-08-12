@@ -1,18 +1,36 @@
+from posixpath import join
 from src.molgenis.catalogue.main import Molgenis
 from src.molgenis.catalogue.transform import TransformData
+from decouple import config
 
-NETWORKS = ['LifeCycle', 'ATHLETE', 'LongITools']  # fill out network databases in staging
-COHORTS = ['NFBC1966', 'NFBC1986', 'KANC']  # fill out cohort databases in staging
+NETWORKS = config('MG_CATALOGUE_NETWORKS', cast=lambda v: [s.strip() for s in v.split(',')])
+COHORTS = config('MG_CATALOGUE_COHORTS', cast=lambda v: [s.strip() for s in v.split(',')])  
 
 # Staging server details
-URL_STAGING = 'https://data-catalogue-staging.molgeniscloud.org/'  # fill out url of staging area
-USERNAME_STAGING = 'admin'
-PASSWORD_STAGING = ''
+URL_STAGING = config('MG_CATALOGUE_URL_STAGING')
+USERNAME_STAGING = config('MG_CATALOGUE_USERNAME_STAGING')
+PASSWORD_STAGING = config('MG_CATALOGUE_PASSWORD_STAGING')
 
 # Production server details
-URL_PROD = 'https://emx2.test.molgenis.org/'  # fill out url of combined production catalogue
-USERNAME_PROD = 'admin'
-PASSWORD_PROD = ''
+URL_PROD = config('MG_CATALOGUE_URL_PROD')
+USERNAME_PROD = config('MG_CATALOGUE_USERNAME_PROD')
+PASSWORD_PROD = config('MG_CATALOGUE_PASSWORD_PROD')
+
+print('-----  Config variables loaded ----')
+
+print('URL_STAGING: ' + URL_STAGING)
+print('USERNAME_STAGING: ' + USERNAME_STAGING)
+print('PASSWORD_STAGING: ******')
+
+print('URL_PROD: ' + URL_PROD)
+print('USERNAME_PROD: ' + USERNAME_PROD)
+print('PASSWORD_PROD: *****' )
+
+print('NETWORKS: ' + ', '.join(NETWORKS))
+print('COHORTS: ' + ', '.join(COHORTS))
+
+print('-----   ----')
+
 
 # CatalogueOntologies ETL
 # sign in to staging server
