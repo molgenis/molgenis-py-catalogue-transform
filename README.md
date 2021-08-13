@@ -40,7 +40,24 @@ mac: https://www.youtube.com/watch?v=Kg1Yvry_Ydk
 
 windows: https://www.youtube.com/watch?v=APOPm01BVrk
 
-# Running the script using the python virtual environment
+# Running the script
+## Using docker 
+
+(Optionally build the image)
+
+`docker build -t molgenis-py-catalogue-transform:latest .`
+
+Run the script ( and remove container when done)
+
+`docker run --rm -it  molgenis-py-catalogue-transform:latest`
+
+## Using docker-compose  
+
+Edit the env setting in the docker-compose.yml as needed
+
+`docker-compose up`
+
+## Using the python virtual environment
 1. Activate the virtual python environment
 
 `source venv/bin/activate`
