@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.4 (2021-08-16)
+### Fix
+* Catch release tag ([`d6fff54`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/d6fff54424b0e7ec604862764a0fb24a7280156f))
+* Docker release and second build trigger ([`cfb7ee9`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/cfb7ee9dd47d8fc4baecdd8185527533a6268f3e))
+
 ## v1.0.3 (2021-08-16)
 ### Fix
 * Do not upload to PyPi and also run sonar for master ([`804d950`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/804d95057392d4f817764586c8e67025dcec2f77))
