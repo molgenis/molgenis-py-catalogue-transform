@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.6 (2021-08-16)
+### Fix
+* Release to github as well ([`dd25368`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/dd2536816db85f63f42ce5286f6d3bced69f41c7))
+
 ## v1.0.5 (2021-08-16)
 ### Fix
 * Dockerhub and registry credentials ([`de729b4`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/de729b4f1dd8e2e39006dffc7bdda83b97ab188a))
