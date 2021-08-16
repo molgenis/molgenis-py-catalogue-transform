@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-            label 'python-stretch'
+            inheritFrom 'python-stretch'
         }
     }
     environment {
@@ -70,6 +70,9 @@ pipeline {
             }
             steps {
                 milestone 1
+                container('sonar') {
+                    sh "sonar-scanner"
+                }
                 container('python') {
                     sh "git remote set-url origin https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
                     sh "git checkout -f master"
