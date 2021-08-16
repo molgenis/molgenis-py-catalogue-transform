@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.5 (2021-08-16)
+### Fix
+* Dockerhub and registry credentials ([`de729b4`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/de729b4f1dd8e2e39006dffc7bdda83b97ab188a))
+* Skipping second build after release ([`c6e741b`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/c6e741bd57ad8fa40ed581a7f280683af9f0b6b7))
+* Dockerhub and registry credentials ([`fb81861`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/fb81861eef80b391b3695fd5fe8484e8c95ebda5))
+
 ## v1.0.4 (2021-08-16)
 ### Fix
 * Catch release tag ([`d6fff54`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/d6fff54424b0e7ec604862764a0fb24a7280156f))
