@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.7 (2021-08-16)
+### Fix
+* Update github_token to gh_token to comply to semantic-release ([`078eb06`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/078eb06aa9917782bf4d0ae3fdb81c00e3d922c6))
+
 ## v1.0.6 (2021-08-16)
 ### Fix
 * Release to github as well ([`dd25368`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/dd2536816db85f63f42ce5286f6d3bced69f41c7))
