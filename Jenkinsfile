@@ -5,7 +5,6 @@ pipeline {
         }
     }
     environment {
-        POETRY_CACHE_DIR = '/usr/src/app/.cache'
         REPOSITORY = 'molgenis/molgenis-py-catalogue-transform'
         LOCAL_REPOSITORY = "${LOCAL_REGISTRY}/molgenis/catalogue-transform"
     }
@@ -24,13 +23,13 @@ pipeline {
                 }
                 container('vault') {
                     script {
-                        env.GITHUB_TOKEN = sh(script: 'vault read -field=value secret/ops/token/github', returnStdout: true)
+                        env.GH_TOKEN = sh(script: 'vault read -field=value secret/ops/token/github', returnStdout: true)
                         env.NEXUS_AUTH = sh(script: 'vault read -field=base64 secret/ops/account/nexus', returnStdout: true)
                         env.SONAR_TOKEN = sh(script: 'vault read -field=value secret/ops/token/sonar', returnStdout: true)
                         env.DOCKERHUB_AUTH = sh(script: 'vault read -field=value secret/gcc/token/dockerhub', returnStdout: true)
                     }
                 }
-                sh "git remote set-url origin https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
+                sh "git remote set-url origin https://${GH_TOKEN}@github.com/${REPOSITORY}.git"
                 sh "git fetch --tags"
                 container('python') {
                     sh "python -m pip install python-semantic-release"
@@ -47,7 +46,7 @@ pipeline {
             }
             steps {
                 container('sonar') {
-                    sh "sonar-scanner -Dsonar.github.oauth=${env.GITHUB_TOKEN} -Dsonar.pullrequest.base=${CHANGE_TARGET} -Dsonar.pullrequest.branch=${BRANCH_NAME} -Dsonar.pullrequest.key=${env.CHANGE_ID} -Dsonar.pullrequest.provider=GitHub -Dsonar.pullrequest.github.repository=molgenis/molgenis-py-catalogue-transform"
+                    sh "sonar-scanner -Dsonar.github.oauth=${env.GH_TOKEN} -Dsonar.pullrequest.base=${CHANGE_TARGET} -Dsonar.pullrequest.branch=${BRANCH_NAME} -Dsonar.pullrequest.key=${env.CHANGE_ID} -Dsonar.pullrequest.provider=GitHub -Dsonar.pullrequest.github.repository=molgenis/molgenis-py-catalogue-transform"
                 }
             }
         }
@@ -55,9 +54,6 @@ pipeline {
             when {
                 allOf {
                     branch 'master'
-                    not {
-                        changelog '.*\\[skip ci\\]$'
-                    }
                 }
             }
             environment {
@@ -74,7 +70,7 @@ pipeline {
                     sh "sonar-scanner"
                 }
                 container('python') {
-                    sh "git remote set-url origin https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
+                    sh "git remote set-url origin https://${GH_TOKEN}@github.com/${REPOSITORY}.git"
                     sh "git checkout -f master"
                     sh "git fetch --tags"
                     script {
@@ -86,6 +82,7 @@ pipeline {
                     sh "#!/busybox/sh\nmkdir -p ${DOCKER_CONFIG}"
                     sh "#!/busybox/sh\necho '{\"auths\": {\"registry.molgenis.org\": {\"auth\": \"${NEXUS_AUTH}\"}, \"https://index.docker.io/v1/\": {\"auth\": \"${DOCKERHUB_AUTH}\"}, \"registry.hub.docker.com\": {\"auth\": \"${DOCKERHUB_AUTH}\"}}}' > ${DOCKER_CONFIG}/config.json"
                     sh "#!/busybox/sh\n/kaniko/executor --context ${WORKSPACE} --destination ${REPOSITORY}:${TAG}"
+                    sh "#!/busybox/sh\n/kaniko/executor --context ${WORKSPACE} --destination ${REPOSITORY}:latest"
                 }
             }
             post {
