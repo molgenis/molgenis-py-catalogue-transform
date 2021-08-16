@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-            inheritFrom 'python-stretch'
+            label 'python-stretch'
         }
     }
     environment {
