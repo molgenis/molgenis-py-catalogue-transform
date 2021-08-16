@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   transform:
-    build: .
+    image: molgenis/molgenis-py-catalogue-transform:latest
     environment:
       - MG_CATALOGUE_NETWORKS=LifeCycle, ATHLETE, LongITools
       - MG_CATALOGUE_COHORTS=NFBC1966, NFBC1986, KANC
