@@ -5,7 +5,6 @@ pipeline {
         }
     }
     environment {
-        POETRY_CACHE_DIR = '/usr/src/app/.cache'
         REPOSITORY = 'molgenis/molgenis-py-catalogue-transform'
         LOCAL_REPOSITORY = "${LOCAL_REGISTRY}/molgenis/catalogue-transform"
     }
