@@ -75,6 +75,9 @@ pipeline {
                     sh "git checkout -f master"
                     sh "git fetch --tags"
                     sh "semantic-release publish"
+                    script {
+                        env.TAG = sh(script: 'semantic-release print-version', returnStdout: true)
+                    }
                 }
                 container (name: 'kaniko', shell: '/busybox/sh') {
                     sh "#!/busybox/sh\nmkdir -p ${DOCKER_CONFIG}"
