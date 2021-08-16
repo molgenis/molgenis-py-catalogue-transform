@@ -85,6 +85,14 @@ pipeline {
                     sh "#!/busybox/sh\n/kaniko/executor --context ${WORKSPACE} --destination ${LOCAL_REPOSITORY}:${TAG}"
                 }
             }
+            post {
+                success {
+                    molgenisSlack(message:  ":confetti_ball: Released ${REPOSITORY} v${TAG}. See https://github.com/${REPOSITORY}/releases/tag/v${TAG}", color:'good')
+                }
+                failure {
+                    molgenisSlack(message:  ":cry: Failed to release ${REPOSITORY}", color:'bad')
+                }
+            }
         }
     }
 }
