@@ -87,10 +87,10 @@ pipeline {
             }
             post {
                 success {
-                    molgenisSlack(message:  ":confetti_ball: Released ${REPOSITORY} v${TAG}. See https://github.com/${REPOSITORY}/releases/tag/v${TAG}", color:'good')
+                    molgenisSlack(message:  ":confetti_ball: Released ${REPOSITORY} v${TAG}. See https://github.com/${REPOSITORY}/releases/tag/v${TAG}", color:'good', channel: "#release")
                 }
                 failure {
-                    molgenisSlack(message:  ":cry: Failed to release ${REPOSITORY}", color:'bad')
+                    molgenisSlack(message:  ":cry: Failed to release ${REPOSITORY}", color:'bad', channel: "#pr-emx2")
                 }
             }
         }
