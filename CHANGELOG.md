@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.9 (2021-08-18)
+### Fix
+* Bump urllib 3 dep ([`96b6fd1`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/96b6fd1a513a31808c666e2b57de6a1b4a09f4a6))
+
 ## v1.0.8 (2021-08-18)
 ### Fix
 * Fix kaniko docker build ([`9f2b59b`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/9f2b59b889b981c03569771425922db5365edf89))
