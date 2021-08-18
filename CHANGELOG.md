@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.10 (2021-08-18)
+### Fix
+* Fix ci docker release ([`55b2aec`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/55b2aec743b15ce497dc4a33d5ee7cc7c60dc753))
+
 ## v1.0.9 (2021-08-18)
 ### Fix
 * Bump urllib 3 dep ([`96b6fd1`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/96b6fd1a513a31808c666e2b57de6a1b4a09f4a6))
