@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.11 (2021-08-18)
+### Fix
+* Use venv as workaround for kaniko build issue ([`abd8e1f`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/abd8e1f3c2b1e850715360b0e6871f511fd4ed12))
+
 ## v1.0.10 (2021-08-18)
 ### Fix
 * Fix ci docker release ([`55b2aec`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/55b2aec743b15ce497dc4a33d5ee7cc7c60dc753))
