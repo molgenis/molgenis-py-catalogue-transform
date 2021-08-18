@@ -1,10 +1,12 @@
 FROM python:3
 
-WORKDIR /usr/src/app
+ENV VIRTUAL_ENV=/opt/venv
+RUN python -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-COPY requirements.txt /usr/src/app/requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies:
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
-COPY . /usr/src/app
-
+COPY . .
 CMD [ "python", "./run.py" ]
