@@ -93,4 +93,7 @@ or directly setting the values on the system environment.
 # For script developers
 Make sure to update the requirements.txt file if requirements change (added, removed, version change ...)
 
+Git project uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) to trigger releases and version updates if needed.
+Make sure to use [appropriate commit message format](https://www.conventionalcommits.org/en/v1.0.0/#specification)
+
 
