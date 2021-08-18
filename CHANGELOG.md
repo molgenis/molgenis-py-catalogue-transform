@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.8 (2021-08-18)
+### Fix
+* Fix kaniko docker build ([`9f2b59b`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/9f2b59b889b981c03569771425922db5365edf89))
+
+### Documentation
+* Add norte about using conventional commits to docs ([`28c8779`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/28c87791b2fa188de74377b92296559c6be15561))
+
 ## v1.0.7 (2021-08-16)
 ### Fix
 * Update github_token to gh_token to comply to semantic-release ([`078eb06`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/078eb06aa9917782bf4d0ae3fdb81c00e3d922c6))
