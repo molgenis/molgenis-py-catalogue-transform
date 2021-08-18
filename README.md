@@ -45,11 +45,11 @@ windows: https://www.youtube.com/watch?v=APOPm01BVrk
 
 (Optionally build the image)
 
-`docker build -t molgenis-py-catalogue-transform:latest .`
+`docker build -t molgenis/molgenis-py-catalogue-transform:latest .`
 
 Run the script ( and remove container when done)
 
-`docker run --rm -it  molgenis-py-catalogue-transform:latest`
+`docker run --rm -it  molgenis/molgenis-py-catalogue-transform:latest`
 
 ## Using docker-compose  
 
