@@ -1,12 +1,16 @@
 FROM python:3
 
-ENV VIRTUAL_ENV=/opt/venv
-RUN python -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+RUN pip install --upgrade pip
 
-# Install dependencies:
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN adduser worker
+USER worker
+WORKDIR /home/worker
 
-COPY . .
+COPY --chown=worker:worker requirements.txt requirements.txt
+RUN pip install --user -r requirements.txt
+
+ENV PATH="/home/worker/.local/bin:${PATH}"
+
+COPY --chown=worker:worker . .
+
 CMD [ "python", "./run.py" ]
