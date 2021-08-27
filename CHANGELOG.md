@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.13 (2021-08-27)
+### Fix
+* Docker build by specifying --destination 2 times in one line ([`ef0cb42`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/ef0cb42c574aafade13884cfb11bd8d5183fec67))
+* Docker build by specifying --destination 2 times ([`a3c287a`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/a3c287a238f752ae0a23e1ea525d342c98ed6c14))
+
 ## v1.0.12 (2021-08-19)
 ### Fix
 * Fix docker build issue ([`234ae12`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/234ae121a4f09a0c446429760a8f50307075b016))
