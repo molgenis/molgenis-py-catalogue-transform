@@ -25,7 +25,6 @@ pipeline {
                     script {
                         env.GH_TOKEN = sh(script: 'vault read -field=value secret/ops/token/github', returnStdout: true)
                         env.NEXUS_AUTH = sh(script: 'vault read -field=base64 secret/ops/account/nexus', returnStdout: true)
-                        env.SONAR_TOKEN = sh(script: 'vault read -field=value secret/ops/token/sonar', returnStdout: true)
                         env.DOCKERHUB_AUTH = sh(script: 'vault read -field=value secret/gcc/token/dockerhub', returnStdout: true)
                     }
                 }
@@ -44,11 +43,6 @@ pipeline {
                 TAG = "PR-${CHANGE_ID}-${BUILD_NUMBER}"
                 DOCKER_CONFIG="/root/.docker"
             }
-            steps {
-                container('sonar') {
-                    sh "sonar-scanner -Dsonar.github.oauth=${env.GH_TOKEN} -Dsonar.pullrequest.base=${CHANGE_TARGET} -Dsonar.pullrequest.branch=${BRANCH_NAME} -Dsonar.pullrequest.key=${env.CHANGE_ID} -Dsonar.pullrequest.provider=GitHub -Dsonar.pullrequest.github.repository=molgenis/molgenis-py-catalogue-transform"
-                }
-            }
         }
         stage('Release: [ master ]') {
             when {
@@ -66,9 +60,6 @@ pipeline {
             }
             steps {
                 milestone 1
-                container('sonar') {
-                    sh "sonar-scanner"
-                }
                 container('python') {
                     sh "git remote set-url origin https://${GH_TOKEN}@github.com/${REPOSITORY}.git"
                     sh "git checkout -f master"
