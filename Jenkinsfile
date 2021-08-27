@@ -39,6 +39,9 @@ pipeline {
             when {
                 allOf {
                     branch 'master'
+                    not {
+                        changelog '.*\\[skip ci\\]$'
+                    }
                 }
             }
             environment {
