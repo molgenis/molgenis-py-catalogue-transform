@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.15 (2021-08-27)
+### Fix
+* Add when condition on master ([`c67cabb`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/c67cabbd5ad86633ce804a79f6a452daab2ca585))
+* Add when condition on master ([`dfdc358`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/dfdc358b09a50bea0f92e51e17ba4aef8dca9729))
+
 ## v1.0.14 (2021-08-27)
 ### Fix
 * Remove sonar step from build ([`6c36b81`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/6c36b811c76f3b8c05b83a264384c9a3cdbad5e8))
