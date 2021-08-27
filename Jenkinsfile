@@ -35,15 +35,6 @@ pipeline {
                 }
             }
         }
-        stage('Build: [ pull request ]') {
-            when {
-                changeRequest()
-            }
-            environment {
-                TAG = "PR-${CHANGE_ID}-${BUILD_NUMBER}"
-                DOCKER_CONFIG="/root/.docker"
-            }
-        }
         stage('Release: [ master ]') {
             when {
                 allOf {
