@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.14 (2021-08-27)
+### Fix
+* Remove sonar step from build ([`6c36b81`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/6c36b811c76f3b8c05b83a264384c9a3cdbad5e8))
+
 ## v1.0.13 (2021-08-27)
 ### Fix
 * Docker build by specifying --destination 2 times in one line ([`ef0cb42`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/ef0cb42c574aafade13884cfb11bd8d5183fec67))
