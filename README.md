@@ -7,6 +7,9 @@ the catalogue.
 4. It extracts all data from the catalogue and loads the networks' (or models') variable metadata to the staging 
 area catalogue (containing only the common data models).
 
+See folder docs for more details on data flows.
+See datamodels for explanation how to set up staging areas and the datamodels to use in the databases.
+
 # System requirements
 - Python 3 (3.8.6)
 
