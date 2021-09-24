@@ -1,6 +1,5 @@
 import os
 import requests
-#from requests.models import Response
 
 class Molgenis:
     """
@@ -20,9 +19,10 @@ class Molgenis:
         """Sign into molgenis and retrieve session cookie"""
         query = 'mutation{signin(email: "%s", password: "%s"){status,message}}' % (self.email, self.password)
 
-        response = requests.post(self.url + 'apps/central/graphql',
-                                 json={'query': query}
-                                 )
+        response = requests.post(
+            self.url + 'apps/central/graphql',
+            json={'query': query}
+        )
 
         responseJson = response.json()
 
@@ -33,10 +33,10 @@ class Molgenis:
             self.cookies = response.cookies
         elif status == 'FAILED':
             print(message)
-            exit()
+            exit(1)
         else:
             print('Error: sign in failed, exiting.')
-            exit()
+            exit(1)
 
     def downloadZip(self):
         """Download molgenis zip for given Database."""
@@ -53,7 +53,7 @@ class Molgenis:
             fh.close()
         else:
             print('Error: download failed, did you use the correct credentials?')
-            exit()
+            exit(1)
 
     def uploadZip(self):
         """Upload molgenis zip to fill Database"""
@@ -73,6 +73,14 @@ class Molgenis:
             cookies=self.cookies,
             files=zip
         )
+
+        responseJson = response.json()
+        errors = responseJson['errors'][0]
+        if errors:
+            print('Upload response: ' + str(response))
+            print(errors)
+            exit(1)
+
         try:
             os.remove("upload.zip")
         except PermissionError:
