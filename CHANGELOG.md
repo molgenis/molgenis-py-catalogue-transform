@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.16 (2021-12-02)
+### Fix
+* Ref to ref_array for ageGroups ([`60d6143`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/60d6143c9516c4d18dbca8fd69d9ce70545b0a37))
+* Model update ([`f251680`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/f25168024d293f9ab8bed27c574ec7f7310cf9c0))
+
+### Documentation
+* Add docs on data flows and datamodels for staging areas ([`b338ff4`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/b338ff4397ed34e31fff282045c38b1dd078d8ff))
+
 ## v1.0.15 (2021-08-27)
 ### Fix
 * Add when condition on master ([`c67cabb`](https://github.com/molgenis/molgenis-py-catalogue-transform/commit/c67cabbd5ad86633ce804a79f6a452daab2ca585))
