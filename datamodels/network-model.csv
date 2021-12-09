@@ -1,0 +1,60 @@
+tableName,tableExtends,columnName,columnType,key,required,refSchema,refTable,refLink,refBack,validation,semantics,description
+AllTargetVariables,,,,,,,,,,,,"Generic listing of all variables. Should not be used directly, please use Variables or RepeatedVariables instead"
+AllTargetVariables,,release,ref,1,TRUE,,Releases,,,,,release this table definition is part of
+AllTargetVariables,,table,ref,1,TRUE,,TargetTables,release,,,,table this variable is part of
+AllTargetVariables,,name,,1,TRUE,,,,,,,"name of the variable, unique within a table"
+AllTargetVariables,,collectionEvent,ref,,,,CollectionEvents,,,,,in case of protocolised data collection this defines the moment in time this variable is collected on
+AllTargetVariables,,mg_tableclass,,,,,,,,,,
+CollectionEvents,,,,,,,,,,,,Definition of an action of data collection for a resource
+CollectionEvents,,resource,ref,1,TRUE,,Resources,,,,,
+CollectionEvents,,name,,1,TRUE,,,,,,,
+CollectionEvents,,description,,,,,,,,,,
+CollectionEvents,,ageGroups,ref_array,,,CatalogueOntologies,AgeGroups,,,,,"Age groups included, if applicable"
+CollectionEvents,,subcohorts,ref_array,,,,Subcohorts,resource,,,,(sub)populations that are targetted with this collection event
+Networks,Resources,,,,,,,,,,,Collaborations of multiple institutions
+Releases,,,,,,,,,,,,"Definition of a data relase, in case of Model this will not include data"
+Releases,,resource,ref,1,TRUE,,Resources,,,,,Link to the resource of which contents has been released
+Releases,,version,,1,TRUE,,,,,,,version of the release
+RepeatedTargetVariables,AllTargetVariables,,,,,,,,,,,Definition of a repeated variable. Refers to another variable for its definition.
+RepeatedTargetVariables,,isRepeatOf,ref,,TRUE,,TargetVariables,release,,,,reference to the definition of the variable that is being repeated
+Resources,,,,,,,,,,,,"Generic listing of all resources. Should not be used directly, instead use specific types such as Databanks and Studies"
+Resources,,acronym,,1,TRUE,,,,,,,Unique identifier within this catalogue
+Resources,,name,,2,,,,,,,,Human readible name of this resource
+Subcohorts,,,,,,,,,,,,Subpopulations defined in this resource
+Subcohorts,,resource,ref,1,TRUE,,Resources,,,,,"E.g. 'Mothers in first trimester','newborns'"
+Subcohorts,,name,,1,TRUE,,,,,,,"E.g. 'Mothers in first trimester','newborns'"
+Subcohorts,,description,text,,,,,,,,,
+Subcohorts,,ageGroups,ref_array,,,CatalogueOntologies,AgeGroups,,,,,
+Subcohorts,,disease,ref_array,,,CatalogueOntologies,Diseases,,,,,
+Subcohorts,,inclusionCriteria,ref_array,,,CatalogueOntologies,InclusionCriteria,,,,,
+Subcohorts,,countries,ref_array,,,CatalogueOntologies,Countries,,,,,
+Subcohorts,,regions,ref_array,,,CatalogueOntologies,Regions,,,,,e.g. province
+Subcohorts,,supplementaryInformation,text,,,,,,,,,
+TargetTables,,,,,,,,,,,,Definition of a table within a data release
+TargetTables,,release,ref,1,TRUE,,Releases,,,,,resource + version this table is defined for
+TargetTables,,name,,1,TRUE,,,,,,,unique name in the release
+TargetTables,,label,,,,,,,,,,short human readible description
+TargetTables,,keywords,ref_array,,,CatalogueOntologies,Keywords,,,,,enables grouping of table list into topic and to display tables in a tree
+TargetTables,,description,text,,,,,,,,,description of the role/function of this table
+TargetTables,,numberOfRows,int,,,,,,,,,count of the numbe of records in this table
+TargetVariableValues,,,,,,,,,,,,Listing of categorical value+label definition in case of a categorical variable
+TargetVariableValues,,release,ref,1,TRUE,,Releases,,,,,
+TargetVariableValues,,variable,ref,1,TRUE,,TargetVariables,release,,,,e.g. PATO
+TargetVariableValues,,value,,1,TRUE,,,,,,,e.g. '1'
+TargetVariableValues,,label,,,TRUE,,,,,,,
+TargetVariableValues,,order,int,,,,,,,,,
+TargetVariableValues,,isMissing,bool,,,,,,,,,
+TargetVariableValues,,ontologyTermIRI,,,,,,,,,,reference to ontology term that defines this categorical value
+TargetVariables,AllTargetVariables,,,,,,,,,,,"Definition of a non-repeated variable, or of the first variable from a repeated range"
+TargetVariables,,label,,,,,,,,,,
+TargetVariables,,format,ref,,,CatalogueOntologies,Formats,,,,,"string,int,decimal,date,datetime etc"
+TargetVariables,,unit,ref,,,CatalogueOntologies,Units,,,,,unit ontology
+TargetVariables,,references,ref,,,,TargetVariables,release,,,,to define foreigh key relationships between variables within or across tables
+TargetVariables,,mandatory,bool,,,,,,,,,whether this variable is required within this collection
+TargetVariables,,description,text,,,,,,,,,
+TargetVariables,,order,int,,,,,,,,,to sort variables you can optionally add an order value
+TargetVariables,,exampleValues,string_array,,,,,,,,,
+TargetVariables,,permittedValues,refback,,,,TargetVariableValues,,variable,,,
+TargetVariables,,repeats,refback,,,,RepeatedTargetVariables,,isRepeatOf,,,listing of all repeated variables defined for this variable
+TargetVariables,,keywords,ref_array,,,CatalogueOntologies,Keywords,,,,,
+TargetVariables,,vocabularies,ref_array,,,CatalogueOntologies,Vocabularies,,,,,
