@@ -1,9 +1,11 @@
-from zipfile import ZipFile
-import os
 import shutil
-import pandas as pd
 import numpy as np
+import os
+import pandas as pd
+import pathlib
+import sys
 
+from zipfile import ZipFile
 
 def float_to_int(df):
     """
@@ -45,10 +47,12 @@ class TransformData:
             print('Error: unzip failed, permission denied')
             exit()
         try:
-            os.remove("data.zip")
+            #os.remove("data.zip")
+            pathlib.Path('data.zip').unlink(missing_ok=True)
         except PermissionError:
             # remove fails on windows
-            pass
+            #pass
+            sys.exit('Error deleting data.zip')
 
     def rename_and_delete_files(self):
         for file_name in os.listdir(self.path):

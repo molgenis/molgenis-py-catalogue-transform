@@ -1,4 +1,6 @@
-import os
+#import os
+import sys
+import pathlib
 import requests
 
 class Molgenis:
@@ -82,7 +84,8 @@ class Molgenis:
             exit(1)
 
         try:
-            os.remove("upload.zip")
+            #os.remove("upload.zip")
+            pathlib.Path('upload.zip').unlink(missing_ok=True)
         except PermissionError:
-            # remove fails on windows
-            pass
+            sys.exit('Error deleting upload.zip')
+            
