@@ -76,6 +76,8 @@ class Molgenis:
             files=zip
         )
 
+        zip['file'].close()
+
         responseJson = response.json()
         try:
             id = responseJson['id']
