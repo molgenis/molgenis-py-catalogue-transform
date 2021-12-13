@@ -2,7 +2,7 @@ import shutil
 import numpy as np
 import os
 import pandas as pd
-import pathlib
+#import pathlib
 import sys
 
 from zipfile import ZipFile
@@ -47,8 +47,12 @@ class TransformData:
             print('Error: unzip failed, permission denied')
             exit()
         try:
-            #os.remove("data.zip")
-            pathlib.Path('data.zip').unlink(missing_ok=True)
+            
+            if os.path.exists('data.zip'):
+                os.remove("data.zip")
+            #p = pathlib.PurePath('data.zip')
+            #print(p.as_posix)
+            #p.unlink(missing_ok=True)
         except PermissionError:
             # remove fails on windows
             #pass
