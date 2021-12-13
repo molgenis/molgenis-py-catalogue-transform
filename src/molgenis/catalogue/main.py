@@ -77,15 +77,17 @@ class Molgenis:
         )
 
         responseJson = response.json()
-        errors = responseJson['errors'][0]
-        if errors:
-            print('Upload response: ' + str(response))
-            print(errors)
-            exit(1)
-
         try:
-            #os.remove("upload.zip")
-            pathlib.Path('upload.zip').unlink(missing_ok=True)
-        except PermissionError:
-            sys.exit('Error deleting upload.zip')
-            
+            id = responseJson['id']
+            url = responseJson['url']
+            print(f'Upload succesfull, id: {id}, url: {url}')
+        except:
+            errors = responseJson['errors'][0]
+            print(f'Upload failed: {errors}')
+        finally:
+            try:
+                #os.remove("upload.zip")
+                pathlib.Path('upload.zip').unlink(missing_ok=True)
+            except PermissionError:
+                sys.exit('Error deleting upload.zip')
+        
