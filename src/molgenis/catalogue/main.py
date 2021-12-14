@@ -34,11 +34,9 @@ class Molgenis:
         if status == 'SUCCESS':
             self.cookies = response.cookies
         elif status == 'FAILED':
-            print(message)
-            exit(1)
+            sys.exit(message)
         else:
-            print('Error: sign in failed, exiting.')
-            exit(1)
+            sys.exit('Error: sign in failed, exiting.')
 
     def downloadZip(self):
         """Download molgenis zip for given Database."""
@@ -85,7 +83,7 @@ class Molgenis:
             print(f'Upload succesfull, id: {id}, url: {url}')
         except:
             errors = responseJson['errors'][0]
-            print(f'Upload failed: {errors}')
+            sys.exit(f'Upload failed: {errors}')
         finally:
             try:
                 if os.path.exists('upload.zip'):
@@ -93,4 +91,3 @@ class Molgenis:
                     #pathlib.Path('upload.zip').unlink(missing_ok=True)
             except PermissionError:
                 sys.exit('Error deleting upload.zip')
-        

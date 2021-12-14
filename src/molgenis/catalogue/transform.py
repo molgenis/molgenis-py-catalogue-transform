@@ -41,21 +41,14 @@ class TransformData:
         try:
             data.extractall(self.path)
         except FileNotFoundError:
-            print('Error: unzip failed')
-            exit()
+            sys.exit('Error: unzip failed')
         except PermissionError:
-            print('Error: unzip failed, permission denied')
-            exit()
+            sys.exit('Error: unzip failed, permission denied')
         try:
             
             if os.path.exists('data.zip'):
                 os.remove("data.zip")
-            #p = pathlib.PurePath('data.zip')
-            #print(p.as_posix)
-            #p.unlink(missing_ok=True)
         except PermissionError:
-            # remove fails on windows
-            #pass
             sys.exit('Error deleting data.zip')
 
     def rename_and_delete_files(self):
