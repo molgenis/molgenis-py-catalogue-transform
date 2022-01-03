@@ -4,7 +4,6 @@ import pandas as pd
 import numpy as np
 import shutil
 import sys
-import pathlib
 
 
 def float_to_int(df):
@@ -50,7 +49,6 @@ class TransformData:
 
         try:
             os.remove('data.zip')
-            #pathlib.Path('data.zip').unlink(missing_ok=True)
         except PermissionError:
             sys.exit('Error deleting data.zip')
 
@@ -63,10 +61,6 @@ class TransformData:
                 os.rename(self.path + file_name, self.path + new_file_name)
 
     def transform_cohort(self):
-        # df = pd.DataFrame()
-        # df.loc[0, 'pid'] = self.database
-        # df.to_csv(self.path + 'Cohorts.csv', index=False)
-
         df = pd.DataFrame()
         df.loc[0, 'resource'] = self.database
         df.loc[0, 'version'] = '1.0.0'  # TODO: what to do about cohort versioning?

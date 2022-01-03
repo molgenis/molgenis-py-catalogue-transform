@@ -1,8 +1,6 @@
 import requests
 import sys
-import pathlib
 import os
-import zipfile
 
 
 class Molgenis:
@@ -17,7 +15,6 @@ class Molgenis:
         self.password = password
         
         self.signin()
-    
 
     def signin(self):
         """Sign into molgenis and retrieve session cookie"""
@@ -78,9 +75,8 @@ class Molgenis:
             cookies=self.cookies,
             files=data
         )
-
-        responseJson = response.json()
         data['file'].close()
+        responseJson = response.json()
 
         try:
             response_id = responseJson['id']
