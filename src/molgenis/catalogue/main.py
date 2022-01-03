@@ -1,5 +1,9 @@
-import os
 import requests
+import sys
+import pathlib
+import os
+import zipfile
+
 
 class Molgenis:
     """
@@ -65,24 +69,29 @@ class Molgenis:
 
         self.cookies = response.cookies
 
-        zip = {'file': open('upload.zip', 'rb')}
+        # upload = zipfile.ZipFile('upload.zip', 'w')
+        data = {'file': open('upload.zip', 'rb')}
         response = requests.post(
             self.url + self.database + '/api/zip?async=true',
             auth=(self.email, self.password),
             allow_redirects=True,
             cookies=self.cookies,
-            files=zip
+            files=data
         )
 
         responseJson = response.json()
-        errors = responseJson['errors'][0]
-        if errors:
-            print('Upload response: ' + str(response))
-            print(errors)
-            exit(1)
+        data['file'].close()
 
         try:
-            os.remove("upload.zip")
-        except PermissionError:
-            # remove fails on windows
-            pass
+            response_id = responseJson['id']
+            url = responseJson['url']
+            print(f'Upload successful, id: {response_id}, url: {url}')
+        except:
+            errors = responseJson['errors'][0]
+            print(f'Upload failed: {errors}')
+        finally:
+            try:
+                if os.path.exists('upload.zip'):
+                    os.remove('upload.zip')
+            except PermissionError:
+                sys.exit('Error deleting upload.zip')

@@ -3,7 +3,7 @@ from src.molgenis.catalogue.main import Molgenis
 from src.molgenis.catalogue.transform import TransformData
 from decouple import config
 
-NETWORKS = config('MG_CATALOGUE_NETWORKS', cast=lambda v: [s.strip() for s in v.split(',')])
+MODELS = config('MG_CATALOGUE_MODELS', cast=lambda v: [s.strip() for s in v.split(',')])
 COHORTS = config('MG_CATALOGUE_COHORTS', cast=lambda v: [s.strip() for s in v.split(',')])  
 
 # Staging server details
@@ -26,7 +26,7 @@ print('URL_PROD: ' + URL_PROD)
 print('USERNAME_PROD: ' + USERNAME_PROD)
 print('PASSWORD_PROD: *****' )
 
-print('NETWORKS: ' + ', '.join(NETWORKS))
+print('MODELS: ' + ', '.join(MODELS))
 print('COHORTS: ' + ', '.join(COHORTS))
 
 print('-----   ----')
@@ -47,7 +47,7 @@ session_staging.downloadZip()
 
 # transform data
 print('Transform data, database: %s, delete_from_filename: %s' % ('CatalogueOntologies', 'Ontologies'))
-transform_ontologies = TransformData('', 'Ontologies', NETWORKS)
+transform_ontologies = TransformData('', 'Ontologies', MODELS)
 
 # sign in to production server
 print('Sign in to production server.')
@@ -61,10 +61,10 @@ session_prod = Molgenis(
 print('Load data (upload.zip)')
 session_prod.uploadZip()
 
-# Networks ETL
+# Models ETL
 print()
-print('Network ETL')
-for item in NETWORKS:
+print('Model ETL')
+for item in MODELS:
     # sign in to staging server
     print('Sign in to staging server for database: %s.' % (item))
     session_staging = Molgenis(
@@ -79,9 +79,9 @@ for item in NETWORKS:
     # transform data
 
     print('Transform data, database: %s, delete_from_filename: %s' % (item, 'Target'))
-    transform_network = TransformData(item, 'Target', NETWORKS)
-    # log in to test server
-    # print('Sign in to test server.')
+    transform_model = TransformData(item, 'Target', MODELS)
+    # log in to production server
+    # print('Sign in to production server.')
     # session_prod = Molgenis(
     #     url=URL_PROD,
     #     database='catalogue',
@@ -109,8 +109,8 @@ for item in COHORTS:
     session_staging.downloadZip()
     # transform data
     print('Transform data, database: %s, delete_from_filename: %s' % (item, 'Source'))
-    transform_cohorts = TransformData(item, 'Source', NETWORKS)
-    # log in to test server
+    transform_cohorts = TransformData(item, 'Source', MODELS)
+    # # log in to production server
     # print('Sign in to production server.')
     # session_prod = Molgenis(
     #     url=URL_PROD,
@@ -122,11 +122,11 @@ for item in COHORTS:
     print('Load data (upload.zip)')
     session_prod.uploadZip()
 
-# Networks to staging catalogue ETL
+# Models to staging catalogue ETL
 print()
-print('Networks to staging catalogue ETL')
+print('Networks to staging CommonDataModels ETL')
 # log in to production server
-print('Sign in to test server for database: catalogue.')
+print('Sign in to production server for database: catalogue.')
 session_prod = Molgenis(
     url=URL_PROD,
     database='catalogue',
@@ -137,13 +137,13 @@ session_prod = Molgenis(
 print('Extract data (data.zip)')
 session_prod.downloadZip()
 # transform data
-print('Transform Networks data, database: %s,  delete_from_filename: %s' % ('catalogue', 'catalogue'))
-back_to_staging = TransformData('', 'catalogue', NETWORKS)
+print('Transform Models data, database: %s,  delete_from_filename: %s' % ('catalogue', 'catalogue'))
+back_to_staging = TransformData('', 'catalogue', MODELS)
 # log in to staging server
-print('Sign in to staging server for database: Catalogue.')
+print('Sign in to staging server for database: CommonDataModels.')
 session_staging = Molgenis(
     url=URL_STAGING,
-    database='Catalogue',
+    database='CommonDataModels',
     email=USERNAME_STAGING,
     password=PASSWORD_STAGING
 )

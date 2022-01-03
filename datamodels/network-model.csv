@@ -11,15 +11,15 @@ CollectionEvents,,name,,1,TRUE,,,,,,,
 CollectionEvents,,description,,,,,,,,,,
 CollectionEvents,,ageGroups,ref_array,,,CatalogueOntologies,AgeGroups,,,,,"Age groups included, if applicable"
 CollectionEvents,,subcohorts,ref_array,,,,Subcohorts,resource,,,,(sub)populations that are targetted with this collection event
-Networks,Resources,,,,,,,,,,,Collaborations of multiple institutions
+Models,Resources,,,,,,,,,,,Collaborations of multiple institutions
 Releases,,,,,,,,,,,,"Definition of a data relase, in case of Model this will not include data"
 Releases,,resource,ref,1,TRUE,,Resources,,,,,Link to the resource of which contents has been released
 Releases,,version,,1,TRUE,,,,,,,version of the release
 RepeatedTargetVariables,AllTargetVariables,,,,,,,,,,,Definition of a repeated variable. Refers to another variable for its definition.
 RepeatedTargetVariables,,isRepeatOf,ref,,TRUE,,TargetVariables,release,,,,reference to the definition of the variable that is being repeated
 Resources,,,,,,,,,,,,"Generic listing of all resources. Should not be used directly, instead use specific types such as Databanks and Studies"
-Resources,,acronym,,1,TRUE,,,,,,,Unique identifier within this catalogue
-Resources,,name,,2,,,,,,,,Human readible name of this resource
+Resources,,pid,,1,TRUE,,,,,,,Persistent identifier for this resource
+Resources,,name,,2,,,,,,,,Name of resource used in European projects
 Subcohorts,,,,,,,,,,,,Subpopulations defined in this resource
 Subcohorts,,resource,ref,1,TRUE,,Resources,,,,,"E.g. 'Mothers in first trimester','newborns'"
 Subcohorts,,name,,1,TRUE,,,,,,,"E.g. 'Mothers in first trimester','newborns'"

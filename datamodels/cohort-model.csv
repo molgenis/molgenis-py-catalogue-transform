@@ -4,7 +4,6 @@ AllSourceVariables,,table,ref,1,TRUE,,SourceTables,,,,,table this variable is pa
 AllSourceVariables,,name,,1,TRUE,,,,,,,"name of the variable, unique within a table"
 AllSourceVariables,,collectionEvent,ref,,,,CollectionEvents,,,,,in case of protocolised data collection this defines the moment in time this variable is collected on
 AllSourceVariables,,mg_tableclass,,,,,,,,,,
-AllSourceVariables,,mappings,refback,,,,VariableMappings,,fromVariable,,,listing of the VariableMappings defined between this variable and standard/harmonized variables
 SourceTables,,,,,,,,,,,,Definition of a table within a data release
 SourceTables,,name,,1,TRUE,,,,,,,unique name in the release
 SourceTables,,label,,,,,,,,,,short human readible description
@@ -21,7 +20,7 @@ SourceVariables,,exampleValues,string_array,,,,,,,,,
 SourceVariables,,mandatory,bool,,,,,,,,,whether this variable is required within this collection
 SourceVariables,,permittedValues,refback,,,,SourceVariableValues,,variable,,,
 SourceVariables,,repeats,refback,,,,RepeatedSourceVariables,,isRepeatOf,,,listing of all repeated variables defined for this variable
-SourceVariables,,keywords,ref_array,,,CatalogueOntologies,Keywords,,,,,
+SourceVariables,,keywords,ref_ontology,,,CatalogueOntologies,Keywords,,,,,
 SourceVariables,,vocabularies,ref_array,,,CatalogueOntologies,Vocabularies,,,,,
 RepeatedSourceVariables,AllSourceVariables,,,,,,,,,,,Definition of a repeated variable. Refers to another variable for its definition.
 RepeatedSourceVariables,,isRepeatOf,ref,,TRUE,,SourceVariables,,,,,reference to the definition of the variable that is being repeated
@@ -33,18 +32,17 @@ SourceVariableValues,,order,int,,,,,,,,,
 SourceVariableValues,,isMissing,bool,,,,,,,,,
 SourceVariableValues,,ontologyTermIRI,,,,,,,,,,reference to ontology term that defines this categorical value
 TableMappings,,,,,,,,,,,,"Mapping from collected tables to standard/harmonized tables, optionally including ETL syntaxes"
-TableMappings,,fromTable,ref,1,TRUE,,SourceTables,,,,,name of the table being mapped from
-TableMappings,,toNetwork,ref,1,TRUE,Catalogue,Networks,,,,,name of the Network or common data model being mapped to
-TableMappings,,toTable,ref,1,TRUE,Catalogue,Tables,toNetwork,,,,name of the table being mapped to
+TableMappings,,fromTable,ref_array,1,TRUE,,SourceTables,,,,,name of the table being mapped from
+TableMappings,,toModel,ref,1,TRUE,CommonDataModels,Models,,,,,name of the common data model being mapped to
+TableMappings,,toTable,ref,1,TRUE,CommonDataModels,Tables,toModel,,,,name of the table being mapped to
 TableMappings,,order,int,,,,,,,,,Order in which table ETLs should be executed for this source-target combination
 TableMappings,,description,text,,,,,,,,,human readible description of the mapping
 TableMappings,,syntax,text,,,,,,,,,"formal definition of the mapping, ideally executable code"
 VariableMappings,,,,,,,,,,,,"Mappings from collected variables to standard/harmonized variables, optionally including ETL syntax."
-VariableMappings,,fromTable,ref,1,TRUE,,SourceTables,,,,,
-VariableMappings,,fromVariable,ref_array,,,,AllSourceVariables,fromTable,,,,"optional, variable. Initially one may only define mapping between releases"
-VariableMappings,,toNetwork,ref,1,TRUE,Catalogue,Networks,,,,,
-VariableMappings,,toTable,ref,1,TRUE,Catalogue,Tables,toNetwork,,,,
-VariableMappings,,toVariable,ref,1,TRUE,Catalogue,AllVariables,toTable,,,,"in UI this is then one lookup field. In Excel it will be two columns. Value of 'targetVariable' is filtered based on selected 'targetCollection' and together be used for fkey(collection,dataset,name) in Variable."
+VariableMappings,,fromVariable,ref_array,,,,AllSourceVariables,,,,,"Source variable(s) to map from."
+VariableMappings,,toModel,ref,1,TRUE,CommonDataModels,Models,,,,,
+VariableMappings,,toTable,ref,1,TRUE,CommonDataModels,Tables,toModel,,,,
+VariableMappings,,toVariable,ref,1,TRUE,CommonDataModels,AllVariables,toTable,,,,"Target variable to map to."
 VariableMappings,,match,ref,,TRUE,CatalogueOntologies,StatusDetails,,,,,"e.g. 'complete, partial, planned, no-match'"
 VariableMappings,,description,text,,,,,,,,,human readible description of the mapping
 VariableMappings,,comments,text,,,,,,,,,additional notes and comments
@@ -52,7 +50,7 @@ VariableMappings,,syntax,text,,,,,,,,,"formal definition of the mapping, ideally
 CollectionEvents,,,,,,,,,,,,Definition of an action of data collection for a resource
 CollectionEvents,,name,,1,TRUE,,,,,,,
 CollectionEvents,,description,,,,,,,,,,
-CollectionEvents,,ageGroups,ref_array,,,CatalogueOntologies,AgeGroups,,,,,"Age groups included, if applicable"
+CollectionEvents,,ageGroups,ref_ontology,,,CatalogueOntologies,AgeGroups,,,,,"Age groups included, if applicable"
 CollectionEvents,,noParticipants,int,,,,,,,,,number of participants sampled in this event
 CollectionEvents,,subcohorts,ref_array,,,,Subcohorts,,,,,(sub)populations that are targeted with this collection event
 Subcohorts,,,,,,,,,,,,Subpopulations defined in this resource

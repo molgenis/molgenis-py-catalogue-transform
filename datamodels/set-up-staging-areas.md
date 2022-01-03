@@ -1,6 +1,6 @@
 #Set up cohort staging areas as follows:
 
-1. Go to a emx2 server
+1. Go to an emx2 server
 
 2. Load [CatalogueOntologies.csv](https://github.com/molgenis/molgenis-py-catalogue-transform/datamodels/CatalogueOntologies.zip) 
 in a schema called CatalogueOntologies (or choose another name, see 5). You should also load data in the tables, example data are 
@@ -10,7 +10,8 @@ in a schema called CatalogueOntologies (or choose another name, see 5). You shou
 (or choose another name, see 5). This database contains only the common data model variable metadata, which can be extracted from production 
 data catalogue running the molgenis-py-catalogue-transform script.
 
-4. Make separate schemas for each cohort that will enter data.
+4. Make separate schemas for each cohort that will enter data. At least cohort pid and name should already be filled out in production 'catalogue' schema
+table 'Cohorts'.
 
 5. Optional: Change the schema references (column 'RefSchema') in molgenis.csv  
 cohort_model.csv to the respective schema names used in 2 and 3. 
