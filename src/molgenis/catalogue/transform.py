@@ -47,10 +47,10 @@ class TransformData:
             exit()
         data.close()
 
-        # try:
-        #     os.remove('data.zip')
-        # except PermissionError:
-        #     sys.exit('Error deleting data.zip')
+        try:
+            os.remove('data.zip')
+        except PermissionError:
+            sys.exit('Error deleting data.zip')
 
     def rename_and_delete_files(self):
         for file_name in os.listdir(self.path):
