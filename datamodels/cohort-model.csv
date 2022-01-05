@@ -20,7 +20,7 @@ SourceVariables,,exampleValues,string_array,,,,,,,,,
 SourceVariables,,mandatory,bool,,,,,,,,,whether this variable is required within this collection
 SourceVariables,,permittedValues,refback,,,,SourceVariableValues,,variable,,,
 SourceVariables,,repeats,refback,,,,RepeatedSourceVariables,,isRepeatOf,,,listing of all repeated variables defined for this variable
-SourceVariables,,keywords,ref_ontology,,,CatalogueOntologies,Keywords,,,,,
+SourceVariables,,keywords,ontology_array,,,CatalogueOntologies,Keywords,,,,,
 SourceVariables,,vocabularies,ref_array,,,CatalogueOntologies,Vocabularies,,,,,
 RepeatedSourceVariables,AllSourceVariables,,,,,,,,,,,Definition of a repeated variable. Refers to another variable for its definition.
 RepeatedSourceVariables,,isRepeatOf,ref,,TRUE,,SourceVariables,,,,,reference to the definition of the variable that is being repeated
@@ -40,6 +40,7 @@ TableMappings,,description,text,,,,,,,,,human readible description of the mappin
 TableMappings,,syntax,text,,,,,,,,,"formal definition of the mapping, ideally executable code"
 VariableMappings,,,,,,,,,,,,"Mappings from collected variables to standard/harmonized variables, optionally including ETL syntax."
 VariableMappings,,fromVariable,ref_array,,,,AllSourceVariables,,,,,"Source variable(s) to map from."
+VariableMappings,,fromVariablesInOtherTables,ref_array,,,,AllSourceVariables,,,,,"optional, variable from other SourceTables. Initially one may only define mapping between releases"
 VariableMappings,,toModel,ref,1,TRUE,CommonDataModels,Models,,,,,
 VariableMappings,,toTable,ref,1,TRUE,CommonDataModels,Tables,toModel,,,,
 VariableMappings,,toVariable,ref,1,TRUE,CommonDataModels,AllVariables,toTable,,,,"Target variable to map to."
@@ -50,7 +51,7 @@ VariableMappings,,syntax,text,,,,,,,,,"formal definition of the mapping, ideally
 CollectionEvents,,,,,,,,,,,,Definition of an action of data collection for a resource
 CollectionEvents,,name,,1,TRUE,,,,,,,
 CollectionEvents,,description,,,,,,,,,,
-CollectionEvents,,ageGroups,ref_ontology,,,CatalogueOntologies,AgeGroups,,,,,"Age groups included, if applicable"
+CollectionEvents,,ageGroups,ontology_array,,,CatalogueOntologies,AgeGroups,,,,,"Age groups included, if applicable"
 CollectionEvents,,noParticipants,int,,,,,,,,,number of participants sampled in this event
 CollectionEvents,,subcohorts,ref_array,,,,Subcohorts,,,,,(sub)populations that are targeted with this collection event
 Subcohorts,,,,,,,,,,,,Subpopulations defined in this resource
