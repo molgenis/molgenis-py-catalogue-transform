@@ -75,6 +75,7 @@ class Molgenis:
             cookies=self.cookies,
             files=data
         )
+
         data['file'].close()
         responseJson = response.json()
 

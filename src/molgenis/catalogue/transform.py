@@ -1,10 +1,9 @@
-from zipfile import ZipFile
+import shutil
+import numpy as np
 import os
 import pandas as pd
-import numpy as np
-import shutil
 import sys
-
+from zipfile import ZipFile
 
 def float_to_int(df):
     """
@@ -48,7 +47,8 @@ class TransformData:
         data.close()
 
         try:
-            os.remove('data.zip')
+            if os.path.exists('data.zip'):
+                os.remove("data.zip")         
         except PermissionError:
             sys.exit('Error deleting data.zip')
 
