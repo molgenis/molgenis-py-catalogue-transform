@@ -2,7 +2,7 @@
 
 1. Go to an emx2 server
 
-2. Load [CatalogueOntologies.csv](https://github.com/molgenis/molgenis-py-catalogue-transform/datamodels/CatalogueOntologies.zip) 
+2. Load [CatalogueOntologies.zip](https://github.com/molgenis/molgenis-py-catalogue-transform/datamodels/CatalogueOntologies.zip) 
 in a schema called CatalogueOntologies (or choose another name, see 5). You should also load data in the tables, example data are 
 [here](https://github.com/molgenis/molgenis-py-catalogue-transform/datamodels/CatalogueOntologies_with_data.zip).
 
