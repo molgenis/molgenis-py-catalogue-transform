@@ -6,7 +6,7 @@
 in a schema called CatalogueOntologies (or choose another name, see 5). You should also load data in the tables, example data are 
 [here](https://github.com/molgenis/molgenis-py-catalogue-transform/datamodels/CatalogueOntologies_with_data.zip).
 
-3. Load [CommonDataModels.csv](https://github.com/molgenis/molgenis-py-catalogue-transform/datamodels/catalogue_cdm.csv) in a schema called Catalogue 
+3. Load [CommonDataModels.csv](https://github.com/molgenis/molgenis-py-catalogue-transform/datamodels/CommonDataModels.csv) in a schema called Catalogue 
 (or choose another name, see 5). This database contains only the common data model variable metadata, which can be extracted from production 
 data catalogue running the molgenis-py-catalogue-transform script.
 
