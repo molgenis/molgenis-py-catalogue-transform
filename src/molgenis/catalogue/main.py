@@ -33,11 +33,9 @@ class Molgenis:
         if status == 'SUCCESS':
             self.cookies = response.cookies
         elif status == 'FAILED':
-            print(message)
-            exit(1)
+            sys.exit(message)
         else:
-            print('Error: sign in failed, exiting.')
-            exit(1)
+            sys.exit('Error: sign in failed, exiting.')
 
     def downloadZip(self):
         """Download molgenis zip for given Database."""
@@ -53,8 +51,7 @@ class Molgenis:
             fh.write(response.content)
             fh.close()
         else:
-            print('Error: download failed, did you use the correct credentials?')
-            exit(1)
+            sys.exit('Error: download failed, did you use the correct credentials?')
 
     def uploadZip(self):
         """Upload molgenis zip to fill Database"""

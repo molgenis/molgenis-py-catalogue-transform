@@ -39,11 +39,9 @@ class TransformData:
         try:
             data.extractall(self.path)
         except FileNotFoundError:
-            print('Error: unzip failed')
-            exit()
+            sys.exit('Error: unzip failed')
         except PermissionError:
-            print('Error: unzip failed, permission denied')
-            exit()
+            sys.exit('Error: unzip failed, permission denied')
         data.close()
 
         try:
