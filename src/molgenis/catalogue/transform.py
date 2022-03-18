@@ -2,9 +2,7 @@ import shutil
 import numpy as np
 import os
 import pandas as pd
-#import pathlib
 import sys
-
 from zipfile import ZipFile
 
 def float_to_int(df):
@@ -19,13 +17,13 @@ def float_to_int(df):
 
 
 class TransformData:
-    """Transform data model of staging areas for Networks to data model in Data Catalogue"""
+    """Transform data model of staging areas for Models to data model in Data Catalogue"""
 
-    def __init__(self, database, delete_from_filename, networks):
+    def __init__(self, database, delete_from_filename, models):
         self.path = './data/'
         self.database = database
         self.delete_from_filename = delete_from_filename
-        self.networks = networks
+        self.models = models
         
         self.unzip_data()
         self.rename_and_delete_files()
@@ -41,36 +39,26 @@ class TransformData:
         try:
             data.extractall(self.path)
         except FileNotFoundError:
-            print('Error: unzip failed')
-            exit()
+            sys.exit('Error: unzip failed')
         except PermissionError:
-            print('Error: unzip failed, permission denied')
-            exit()
+            sys.exit('Error: unzip failed, permission denied')
+        data.close()
+
         try:
-            
             if os.path.exists('data.zip'):
-                os.remove("data.zip")
-            #p = pathlib.PurePath('data.zip')
-            #print(p.as_posix)
-            #p.unlink(missing_ok=True)
+                os.remove("data.zip")         
         except PermissionError:
-            # remove fails on windows
-            #pass
             sys.exit('Error deleting data.zip')
 
     def rename_and_delete_files(self):
         for file_name in os.listdir(self.path):
-            if file_name in ['molgenis.csv', 'molgenis_members.csv', 'molgenis_settings.csv', 'Networks.csv']:
+            if file_name in ['molgenis.csv', 'molgenis_members.csv', 'molgenis_settings.csv', 'Models.csv']:
                 os.remove(self.path + file_name)
             elif self.delete_from_filename in file_name:
                 new_file_name = file_name.replace(self.delete_from_filename, '')
                 os.rename(self.path + file_name, self.path + new_file_name)
 
     def transform_cohort(self):
-        df = pd.DataFrame()
-        df.loc[0, 'acronym'] = self.database
-        df.to_csv(self.path + 'Cohorts.csv', index=False)
-
         df = pd.DataFrame()
         df.loc[0, 'resource'] = self.database
         df.loc[0, 'version'] = '1.0.0'  # TODO: what to do about cohort versioning?
@@ -89,7 +77,7 @@ class TransformData:
                 try:
                     df = pd.read_csv(self.path + file_name)
                     df['release.resource'] = self.database
-                    df['release.version'] = '1.0.0' # TODO: what to do about cohort versioning?
+                    df['release.version'] = '1.0.0'  # TODO: what to do about cohort versioning?
                     df = float_to_int(df)
                     if file_name == 'VariableValues.csv':
                         df.loc[:, 'label'] = df['label'].replace(np.nan, 'NA')
@@ -101,7 +89,7 @@ class TransformData:
                     df = pd.read_csv(self.path + file_name)
                     df['fromRelease.resource'] = self.database
                     df['fromRelease.version'] = '1.0.0'  # TODO: what to do about cohort versioning?
-                    df['toRelease.resource'] = df['toNetwork']
+                    df['toRelease.resource'] = df['toModel']
                     df['toRelease.version'] = '1.0.0'  # TODO: fix versioning
                     df = float_to_int(df)
                     df.to_csv(self.path + file_name, index=False)
@@ -113,8 +101,8 @@ class TransformData:
             if file_name in ['Tables.csv', 'Variables.csv', 'VariableValues.csv', 'RepeatedVariables.csv']:
                 try:
                     df = pd.read_csv(self.path + file_name)
-                    df['network'] = df['release.resource']
-                    df = df.loc[df['network'].isin(self.networks)]
+                    df['model'] = df['release.resource']
+                    df = df.loc[df['model'].isin(self.models)]
                     df = float_to_int(df)
                     df.to_csv(self.path + file_name, index=False)
                 except pd.errors.EmptyDataError:

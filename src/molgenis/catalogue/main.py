@@ -1,7 +1,7 @@
-import os
-import sys
-#import pathlib
 import requests
+import sys
+import os
+
 
 class Molgenis:
     """
@@ -15,7 +15,6 @@ class Molgenis:
         self.password = password
         
         self.signin()
-    
 
     def signin(self):
         """Sign into molgenis and retrieve session cookie"""
@@ -34,11 +33,9 @@ class Molgenis:
         if status == 'SUCCESS':
             self.cookies = response.cookies
         elif status == 'FAILED':
-            print(message)
-            exit(1)
+            sys.exit(message)
         else:
-            print('Error: sign in failed, exiting.')
-            exit(1)
+            sys.exit('Error: sign in failed, exiting.')
 
     def downloadZip(self):
         """Download molgenis zip for given Database."""
@@ -54,8 +51,7 @@ class Molgenis:
             fh.write(response.content)
             fh.close()
         else:
-            print('Error: download failed, did you use the correct credentials?')
-            exit(1)
+            sys.exit('Error: download failed, did you use the correct credentials?')
 
     def uploadZip(self):
         """Upload molgenis zip to fill Database"""
@@ -67,30 +63,29 @@ class Molgenis:
 
         self.cookies = response.cookies
 
-        zip = {'file': open('upload.zip', 'rb')}
+        # upload = zipfile.ZipFile('upload.zip', 'w')
+        data = {'file': open('upload.zip', 'rb')}
         response = requests.post(
             self.url + self.database + '/api/zip?async=true',
             auth=(self.email, self.password),
             allow_redirects=True,
             cookies=self.cookies,
-            files=zip
+            files=data
         )
 
-        zip['file'].close()
-
+        data['file'].close()
         responseJson = response.json()
+
         try:
-            id = responseJson['id']
+            response_id = responseJson['id']
             url = responseJson['url']
-            print(f'Upload succesfull, id: {id}, url: {url}')
+            print(f'Upload successful, id: {response_id}, url: {url}')
         except:
             errors = responseJson['errors'][0]
             print(f'Upload failed: {errors}')
         finally:
             try:
                 if os.path.exists('upload.zip'):
-                    os.remove("upload.zip")
-                    #pathlib.Path('upload.zip').unlink(missing_ok=True)
+                    os.remove('upload.zip')
             except PermissionError:
                 sys.exit('Error deleting upload.zip')
-        
